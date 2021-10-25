@@ -10,4 +10,8 @@ class Movie extends Model
 {
     use HasFactory;
     use SoftDeletes;
+
+    public function artists() {
+        return $this->belongsToMany(Artist::class, 'movie_artist');
+    }
 }
