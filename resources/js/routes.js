@@ -9,7 +9,7 @@ const routes = [
         name: "Movies"
     },
     {
-        path: "/movie/:id",
+        path: "/movies/:id",
         component: Movie,
         name: "Movie"
     },

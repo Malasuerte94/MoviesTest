@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\MovieController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+//API - compeititions index show store
+Route::apiResource('movies', MovieController::class)->only(['index', 'show', 'store']);
+//API - players index show store

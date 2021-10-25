@@ -24,10 +24,10 @@ class MovieFactory extends Factory
 
         return [
             'status' => $this->faker->numberBetween(1,2),
-            'name' => $this->faker->city() . ' ' . $this->faker->companySuffix(),
+            'name' => $this->faker->city(),
             'rating' => $this->faker->randomFloat(2,1,10),
             'description' => $this->faker->paragraph(3),
-            'image' => $this->faker->imageUrl(),
+            'image' => $this->faker->imageUrl(140,207,'movies'),
         ];
     }
 }

@@ -5,10 +5,10 @@
         </div>
         <div v-else>
             <div class="row" v-for="row in rows" :key="'row' + row">
-                <div class="col d-flex align-items-stretch p-1" v-for="(movie, column) in bookablesInRow(row)" :key="'row' + row + column">
+                <div class="col-md-12 col-lg-4 d-flex align-items-stretch p-2" v-for="(movie, column) in moviesInRow(row)" :key="'row' + row + column">
                     <movie-list-item v-bind="movie"></movie-list-item>
                 </div>
-                <div class="col p-1" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
+                <div class="col-md-12 col-lg-4 p-2" v-for="p in placehodersInRow(row)" :key="'placeholder' + p + row"></div>
             </div>
         </div>
     </div>
@@ -25,6 +25,7 @@ export default {
     data() {
         return {
             movies: null,
+            columns: 3,
             loading: false,
         };
     },
@@ -46,7 +47,8 @@ export default {
         const request = axios
         .get("/api/movies")
         .then(response => {
-            this.movies = response.data.data;
+            console.log(response.data.length);
+            this.movies = response.data;
             this.loading = false;
         });
 
