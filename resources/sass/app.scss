@@ -6,3 +6,113 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/solid';
+
+
+.bg-main {
+    background-color: $golden;
+
+    a {
+        color: $nav-link;
+      }
+
+    i {
+        font-size: 25px;
+    }
+
+    li {
+        a {
+            font-size: 25px;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.imdb {
+    height: 35px;
+    width: 60px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-image: url('/storage/images/logo-imdb.png');
+}
+
+
+.animated-burger-menu {
+        width: 30px;
+        height: 25px;
+        position: relative;
+        margin: 0px;
+        transform: rotate(0deg);
+        transition: .5s ease-in-out;
+        cursor: pointer;
+
+        span {
+            display: block;
+            position: absolute;
+            height: 3px;
+            width: 100%;
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+            background: $dark;
+
+            &:nth-child(1) {top: 0px;}
+            &:nth-child(2) {top: 10px;}
+            &:nth-child(3) {top: 20px;}
+        }
+
+        &.open {
+            span {
+                &:nth-child(1) {
+                    transform: rotate(-30deg);
+                    top: 20%;
+                    width: 20px; 
+                    }
+                &:nth-child(2) {
+                    width: 40px;
+                    }
+                &:nth-child(3) {
+                    transform: rotate(30deg);
+                    top: 60%;
+                    width: 20px
+                    }
+            }
+        } 
+}
+.navbar-toggler {
+    border:unset;
+}
+
+@media (max-width: 768px) {
+    .navbar-collapse {
+        position: absolute;
+        top: 51px;
+        left: 0;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-bottom: 25px;
+        width: 100%;
+        height: calc(100vh - 51px);
+        background-color: $golden;
+        display: flex;
+        &.collapsing {
+            height: calc(100vh - 51px);
+            transition: left 0.3s ease;
+            left: -100%;
+        }
+        &.show {
+            left: 0;
+            transition: left 0.3s ease-in;
+        }
+        ul {
+            width: 100%;
+            text-align: center;
+        }
+    }
+}
