@@ -15,8 +15,8 @@ class ArtistsTableSeeder extends Seeder
      */
     public function run()
     {
-        Artist::factory()->has(Movie::factory()->count(3))
-        ->count(30)
-        ->create();
+        // Artist::factory()->has(Movie::factory()->count(3))
+        // ->count(30)
+        // ->create();
     }
 }

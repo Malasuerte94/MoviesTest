@@ -1,12 +1,18 @@
 import VueRouter from "vue-router";
 import Movies from "./movies/Movies";
 import Movie from "./movie/Movie";
+import MoviesTop from "./movies/MoviesTop";
 
 const routes = [
     {
         path: "/",
         component: Movies,
         name: "Movies"
+    },
+    {
+        path: "/top100",
+        component: MoviesTop,
+        name: "Top 100"
     },
     {
         path: "/movies/:id",

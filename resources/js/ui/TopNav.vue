@@ -14,15 +14,10 @@
 
                 <!-- Links -->
                 <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Top 100<span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Artists</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Movies</a>
-                </li>
+
+                <router-link tag="li" class="nav-item" active-class="active" to="/" exact><a class="nav-link">Movies</a></router-link>
+                <router-link tag="li" class="nav-item" active-class="active" to="/top100" exact><a class="nav-link">Top 100</a></router-link>
+                <router-link tag="li" class="nav-item" active-class="active" to="/addmovie" exact><a class="nav-link">Add Movie</a></router-link>
                 </ul>
                 <!-- Links -->
 

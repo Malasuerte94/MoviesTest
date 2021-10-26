@@ -16,7 +16,7 @@ class MoviesTableSeeder extends Seeder
     public function run()
     {
         Movie::factory()->has(Artist::factory()->count(5))
-        ->count(10)
+        ->count(12)
         ->create();
     }
 }

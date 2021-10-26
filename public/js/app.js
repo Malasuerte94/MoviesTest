@@ -2107,12 +2107,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     name: String,
     rating: String,
     image: String,
-    id: Number
+    id: Number,
+    status: Number,
+    artists: Array
+  },
+  computed: {
+    artistas: function artistas() {
+      var grouped = _.mapValues(_.groupBy(this.artists, 'title'), function (alist) {
+        return alist.map(function (artist) {
+          return _.omit(artist, 'title');
+        });
+      });
+
+      return grouped;
+    }
   }
 });
 
@@ -2122,6 +2141,200 @@ __webpack_require__.r(__webpack_exports__);
 /*!*********************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/Movies.vue?vue&type=script&lang=js& ***!
   \*********************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MovieListItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MovieListItem */ "./resources/js/movies/MovieListItem.vue");
+/* harmony import */ var _MoviesFilter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MoviesFilter */ "./resources/js/movies/MoviesFilter.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    MovieListItem: _MovieListItem__WEBPACK_IMPORTED_MODULE_0__["default"],
+    MovieFilter: _MoviesFilter__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  data: function data() {
+    return {
+      movies: null,
+      columns: 3,
+      loading: false
+    };
+  },
+  computed: {
+    rows: function rows() {
+      return this.movies === null ? 0 : Math.ceil(this.movies.length / this.columns);
+    }
+  },
+  methods: {
+    moviesInRow: function moviesInRow(row) {
+      return this.movies.slice((row - 1) * this.columns, row * this.columns);
+    },
+    placehodersInRow: function placehodersInRow(row) {
+      return this.columns - this.moviesInRow(row).length;
+    },
+    ChangeM: function ChangeM(movies) {
+      this.movies = movies;
+    }
+  },
+  created: function created() {
+    var _this = this;
+
+    this.loading = true;
+    var request = axios.get("/api/movies-artists").then(function (response) {
+      _this.movies = response.data;
+      _this.loading = false;
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  data: function data() {
+    return {
+      name: null,
+      rating: null,
+      role: null,
+      status_movie: null,
+      loading: false,
+      status: null,
+      error: null
+    };
+  },
+  methods: {
+    check: function check() {
+      var _this = this;
+
+      this.loading = true;
+      this.error = null;
+      axios.get("api/movies-artists/filter?name=".concat(this.name, "&rating=").concat(this.rating, "&status=").concat(this.status_movie, "&role=").concat(this.role)).then(function (response) {
+        _this.passEvent(response.data);
+
+        _this.status = response.status;
+      })["catch"](function (error) {
+        _this.status = error.response.status;
+      }).then(function () {
+        return _this.loading = false;
+      });
+    },
+    passEvent: function passEvent(movies) {
+      this.$emit('changeMovies', movies);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -2177,7 +2390,6 @@ __webpack_require__.r(__webpack_exports__);
 
     this.loading = true;
     var request = axios.get("/api/movies").then(function (response) {
-      console.log(response.data.length);
       _this.movies = response.data;
       _this.loading = false;
     });
@@ -2197,11 +2409,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
-//
-//
-//
 //
 //
 //
@@ -2332,9 +2539,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
+/* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _movies_Movies__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./movies/Movies */ "./resources/js/movies/Movies.vue");
 /* harmony import */ var _movie_Movie__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./movie/Movie */ "./resources/js/movie/Movie.vue");
+/* harmony import */ var _movies_MoviesTop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./movies/MoviesTop */ "./resources/js/movies/MoviesTop.vue");
+
 
 
 
@@ -2343,11 +2552,15 @@ var routes = [{
   component: _movies_Movies__WEBPACK_IMPORTED_MODULE_0__["default"],
   name: "Movies"
 }, {
+  path: "/top100",
+  component: _movies_MoviesTop__WEBPACK_IMPORTED_MODULE_2__["default"],
+  name: "Top 100"
+}, {
   path: "/movies/:id",
   component: _movie_Movie__WEBPACK_IMPORTED_MODULE_1__["default"],
   name: "Movie"
 }];
-var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
+var router = new vue_router__WEBPACK_IMPORTED_MODULE_3__["default"]({
   routes: routes,
   mode: 'history'
 });
@@ -37892,6 +38105,84 @@ component.options.__file = "resources/js/movies/Movies.vue"
 
 /***/ }),
 
+/***/ "./resources/js/movies/MoviesFilter.vue":
+/*!**********************************************!*\
+  !*** ./resources/js/movies/MoviesFilter.vue ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MoviesFilter.vue?vue&type=template&id=862db10e& */ "./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e&");
+/* harmony import */ var _MoviesFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MoviesFilter.vue?vue&type=script&lang=js& */ "./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MoviesFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/movies/MoviesFilter.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/movies/MoviesTop.vue":
+/*!*******************************************!*\
+  !*** ./resources/js/movies/MoviesTop.vue ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MoviesTop.vue?vue&type=template&id=3a3686b8& */ "./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8&");
+/* harmony import */ var _MoviesTop_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./MoviesTop.vue?vue&type=script&lang=js& */ "./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _MoviesTop_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__.render,
+  _MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/movies/MoviesTop.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/ui/TopNav.vue":
 /*!************************************!*\
   !*** ./resources/js/ui/TopNav.vue ***!
@@ -37979,6 +38270,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js&":
+/*!***********************************************************************!*\
+  !*** ./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MoviesFilter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesFilter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js&":
+/*!********************************************************************!*\
+  !*** ./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js& ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesTop_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MoviesTop.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesTop_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
 /***/ "./resources/js/ui/TopNav.vue?vue&type=script&lang=js&":
 /*!*************************************************************!*\
   !*** ./resources/js/ui/TopNav.vue?vue&type=script&lang=js& ***!
@@ -38059,6 +38382,40 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Movies_vue_vue_type_template_id_296fe6a1___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Movies_vue_vue_type_template_id_296fe6a1___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Movies.vue?vue&type=template&id=296fe6a1& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/Movies.vue?vue&type=template&id=296fe6a1&");
+
+
+/***/ }),
+
+/***/ "./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e&":
+/*!*****************************************************************************!*\
+  !*** ./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e& ***!
+  \*****************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesFilter_vue_vue_type_template_id_862db10e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MoviesFilter.vue?vue&type=template&id=862db10e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e&");
+
+
+/***/ }),
+
+/***/ "./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8&":
+/*!**************************************************************************!*\
+  !*** ./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8& ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_MoviesTop_vue_vue_type_template_id_3a3686b8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./MoviesTop.vue?vue&type=template&id=3a3686b8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8&");
 
 
 /***/ }),
@@ -38160,6 +38517,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "card card-movie w-100 p-2" }, [
+    _vm.status == 2
+      ? _c("span", { staticClass: "unlisted" }, [
+          _vm._v("\n        unlisted\n    ")
+        ])
+      : _vm._e(),
+    _vm._v(" "),
     _c("img", {
       staticClass: "card-img-top",
       attrs: { src: _vm.image, alt: "seo description" }
@@ -38171,25 +38534,45 @@ var render = function() {
       [
         _c(
           "router-link",
-          { attrs: { to: { name: "movies", params: { id: _vm.id } } } },
+          { attrs: { to: { name: "Movie", params: { id: _vm.id } } } },
           [_c("h2", { staticClass: "card-title" }, [_vm._v(_vm._s(_vm.name))])]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "card-text" }, [
-          _c("span", [
-            _c("i", {
-              staticClass: "fa fa-star pr-1",
-              attrs: { "aria-hidden": "true" }
-            }),
-            _vm._v(_vm._s(_vm.rating))
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "description" }, [
-            _vm._v(
-              "\n                This is test content for humans if this is needd we will show you.\n            "
-            )
-          ])
+        _c("span", [
+          _c("i", {
+            staticClass: "fa fa-star pr-1",
+            attrs: { "aria-hidden": "true" }
+          }),
+          _vm._v(_vm._s(_vm.rating))
         ]),
+        _vm._v(" "),
+        _vm.artists.length
+          ? _c(
+              "div",
+              { staticClass: "card-text" },
+              _vm._l(_vm.artistas, function(artist, title) {
+                return _c(
+                  "div",
+                  { key: title, staticClass: "artists" },
+                  [
+                    _c("b", [_vm._v(_vm._s(title) + ":")]),
+                    _vm._v(" "),
+                    _vm._l(artist, function(artist_details) {
+                      return [
+                        _vm._v(
+                          "\n                    " +
+                            _vm._s(artist_details.name) +
+                            ",\n                "
+                        )
+                      ]
+                    })
+                  ],
+                  2
+                )
+              }),
+              0
+            )
+          : _vm._e(),
         _vm._v(" "),
         _c("button", { staticClass: "btn mt-auto" }, [_vm._v("View more")])
       ],
@@ -38208,6 +38591,381 @@ render._withStripped = true
 /*!**************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/Movies.vue?vue&type=template&id=296fe6a1& ***!
   \**************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.loading
+      ? _c("div", [_c("h1", [_vm._v("Data is loading ... ")])])
+      : _c(
+          "div",
+          [
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12" },
+                [_c("movie-filter", { on: { changeMovies: _vm.ChangeM } })],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.rows, function(row) {
+              return _c(
+                "div",
+                { key: "row" + row, staticClass: "row" },
+                [
+                  _vm._l(_vm.moviesInRow(row), function(movie, column) {
+                    return _c(
+                      "div",
+                      {
+                        key: "row" + row + column,
+                        staticClass:
+                          "col-md-12 col-lg-4 d-flex align-items-stretch p-2"
+                      },
+                      [
+                        _c(
+                          "movie-list-item",
+                          _vm._b({}, "movie-list-item", movie, false)
+                        )
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._l(_vm.placehodersInRow(row), function(p) {
+                    return _c("div", {
+                      key: "placeholder" + p + row,
+                      staticClass: "col-md-12 col-lg-4 p-2"
+                    })
+                  })
+                ],
+                2
+              )
+            })
+          ],
+          2
+        )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesFilter.vue?vue&type=template&id=862db10e& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("div", { staticClass: "form-row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.name,
+                expression: "name"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: { type: "text", name: "name", placeholder: "Movie Name" },
+            domProps: { value: _vm.name },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.name = $event.target.value
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "rating" } }, [
+            _vm._v("Min Rating " + _vm._s(_vm.rating))
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.rating,
+                expression: "rating"
+              }
+            ],
+            staticClass: "form-control form-control-sm",
+            attrs: {
+              type: "range",
+              min: "1.00",
+              max: "10.00",
+              step: "1.00",
+              value: "1.00",
+              name: "rating"
+            },
+            domProps: { value: _vm.rating },
+            on: {
+              __r: function($event) {
+                _vm.rating = $event.target.value
+              }
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.status_movie,
+                expression: "status_movie"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: {
+              name: "statusmovie",
+              "true-value": "1",
+              "false-value": "null",
+              type: "checkbox",
+              value: "2",
+              id: "listed"
+            },
+            domProps: {
+              checked: Array.isArray(_vm.status_movie)
+                ? _vm._i(_vm.status_movie, "2") > -1
+                : _vm._q(_vm.status_movie, "1")
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.status_movie,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? "1" : "null"
+                if (Array.isArray($$a)) {
+                  var $$v = "2",
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.status_movie = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.status_movie = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.status_movie = $$c
+                }
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "listed" } },
+            [_vm._v("Only listed")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: {
+              value: "null",
+              type: "radio",
+              name: "role",
+              id: "all",
+              checked: ""
+            },
+            domProps: { checked: _vm._q(_vm.role, "null") },
+            on: {
+              change: function($event) {
+                _vm.role = "null"
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "all" } },
+            [_vm._v("\n                        Show All\n                    ")]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: {
+              value: "director",
+              type: "radio",
+              name: "role",
+              id: "director"
+            },
+            domProps: { checked: _vm._q(_vm.role, "director") },
+            on: {
+              change: function($event) {
+                _vm.role = "director"
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "director" } },
+            [
+              _vm._v(
+                "\n                        Has Director\n                    "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: { value: "star", type: "radio", name: "role", id: "star" },
+            domProps: { checked: _vm._q(_vm.role, "star") },
+            on: {
+              change: function($event) {
+                _vm.role = "star"
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "star" } },
+            [
+              _vm._v(
+                "\n                        Has Stars\n                    "
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "form-check" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.role,
+                expression: "role"
+              }
+            ],
+            staticClass: "form-check-input",
+            attrs: {
+              value: "writer",
+              type: "radio",
+              name: "role",
+              id: "writer"
+            },
+            domProps: { checked: _vm._q(_vm.role, "writer") },
+            on: {
+              change: function($event) {
+                _vm.role = "writer"
+              }
+            }
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            { staticClass: "form-check-label", attrs: { for: "writer" } },
+            [
+              _vm._v(
+                "\n                        Has Writers\n                    "
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "form-group col-md-4" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-primary btn-block",
+            attrs: { disabled: _vm.loading },
+            on: { click: _vm.check }
+          },
+          [_vm._v("Check")]
+        )
+      ])
+    ]),
+    _vm._v(" "),
+    _vm.status == 404
+      ? _c(
+          "div",
+          { staticClass: "alert alert-warning mt-4", attrs: { role: "alert" } },
+          [_vm._v("\n            We didn't find any results!\n        ")]
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8&":
+/*!*****************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/movies/MoviesTop.vue?vue&type=template&id=3a3686b8& ***!
+  \*****************************************************************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -38306,9 +39064,65 @@ var render = function() {
       _vm._v(" "),
       _c("a", { staticClass: "navbar-brand imdb", attrs: { href: "#" } }),
       _vm._v(" "),
-      _vm._m(1),
+      _c(
+        "div",
+        {
+          staticClass: "collapse navbar-collapse",
+          attrs: { id: "mobilemenu" }
+        },
+        [
+          _c(
+            "ul",
+            { staticClass: "navbar-nav mr-auto" },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-item",
+                  attrs: {
+                    tag: "li",
+                    "active-class": "active",
+                    to: "/",
+                    exact: ""
+                  }
+                },
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("Movies")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-item",
+                  attrs: {
+                    tag: "li",
+                    "active-class": "active",
+                    to: "/top100",
+                    exact: ""
+                  }
+                },
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("Top 100")])]
+              ),
+              _vm._v(" "),
+              _c(
+                "router-link",
+                {
+                  staticClass: "nav-item",
+                  attrs: {
+                    tag: "li",
+                    "active-class": "active",
+                    to: "/addmovie",
+                    exact: ""
+                  }
+                },
+                [_c("a", { staticClass: "nav-link" }, [_vm._v("Add Movie")])]
+              )
+            ],
+            1
+          )
+        ]
+      ),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(1)
     ])
   ])
 }
@@ -38322,37 +39136,6 @@ var staticRenderFns = [
       _c("span"),
       _c("span")
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      { staticClass: "collapse navbar-collapse", attrs: { id: "mobilemenu" } },
-      [
-        _c("ul", { staticClass: "navbar-nav mr-auto" }, [
-          _c("li", { staticClass: "nav-item active" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Top 100"),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Artists")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _vm._v("Movies")
-            ])
-          ])
-        ])
-      ]
-    )
   },
   function() {
     var _vm = this

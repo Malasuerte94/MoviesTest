@@ -16,59 +16,6 @@ h2, button {
     font-size: $font-s-titles-buttons;
 }
 
-
-.nav-imdb {
-    background-color: $golden;
-
-    a {
-        color: $nav-link;
-      }
-
-    i {
-        font-size: $font-s-nav-menu;
-        padding: 5px;
-    }
-
-    li {
-        a {
-            font-size: $font-s-nav-menu;
-            text-transform: uppercase;
-        }
-    }
-}
-
-.card-movie {
-    flex-direction: row;
-      
-    img {
-        width: 45%;
-    }
-    i {
-        color: $golden;
-    }
-    h2 {
-        color: $dark;
-        font-weight: bold;
-        font-size: $font-s-titles-buttons;
-    }
-    button {
-        width: 100%;
-        background-color: $golden;
-        font-size: $font-s-titles-buttons;
-        border-color: $golden;
-        font-weight: 500;
-        &:active, &:focus, &:hover {
-            background-color: $golden;
-            border-color: $golden;
-            box-shadow: 0 0 0 0.2rem rgb(245 197 24 / 42%);
-        }
-    }
-    .description {
-        font-size: $font-s-description;
-    }
-}
-
-
 .imdb {
     height: 35px;
     width: 60px;
@@ -77,7 +24,6 @@ h2, button {
     background-size: cover;
     background-image: url('/storage/images/logo-imdb.png');
 }
-
 
 .animated-burger-menu {
         width: 25px;
@@ -126,6 +72,84 @@ h2, button {
     border:unset;
     padding: 0.25rem 0.25rem;
 }
+
+.nav-imdb {
+    background-color: $golden;
+
+    a {
+        color: $nav-link;
+      }
+
+    i {
+        font-size: $font-s-nav-menu;
+        padding: 5px;
+    }
+
+    li {
+        a {
+            font-size: $font-s-nav-menu;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.card-movie {
+    flex-direction: row;
+    overflow: hidden;
+    .unlisted {
+        background-color:$dark;
+        position: absolute;
+        padding: 0px 5px;
+        color: white;
+        overflow: hidden;
+        border-radius: 5px;
+        top: 10%;
+        width: 20%;
+        text-align: center;
+        left: 0;
+        text-transform: uppercase;
+        font-size: $font-s-description;
+    }
+    img {
+        width: 45%;
+        border-radius: calc(0.25rem - 1px);
+    }
+    i {
+        color: $golden;
+    }
+    h2 {
+        color: $dark;
+        font-weight: bold;
+        font-size: $font-s-titles-buttons;
+    }
+    button {
+        width: 100%;
+        background-color: $golden;
+        font-size: $font-s-titles-buttons;
+        border-color: $golden;
+        font-weight: 500;
+        &:active, &:focus, &:hover {
+            background-color: $golden;
+            border-color: $golden;
+            box-shadow: 0 0 0 0.2rem rgb(245 197 24 / 42%);
+        }
+    }
+    .card-text {
+        font-size: $font-s-description;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+    }
+    .artists {
+        b {
+            text-transform: capitalize;
+        }
+    } 
+}
+
+
+
 
 @media (max-width: 768px) {
     .navbar-collapse {

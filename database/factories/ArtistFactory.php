@@ -29,7 +29,7 @@ class ArtistFactory extends Factory
         ];
 
         return [
-            'name' => $this->faker->name(),
+            'name' => $this->faker->firstName().' '.$this->faker->lastName(),
             'title' => $this->faker->randomElement($titles),
         ];
     }

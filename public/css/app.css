@@ -16116,51 +16116,6 @@ h2, button {
   font-size: 14px;
 }
 
-.nav-imdb {
-  background-color: #F5C518;
-}
-.nav-imdb a {
-  color: #ffffff;
-}
-.nav-imdb i {
-  font-size: 25px;
-  padding: 5px;
-}
-.nav-imdb li a {
-  font-size: 25px;
-  text-transform: uppercase;
-}
-
-.card-movie {
-  flex-direction: row;
-}
-.card-movie img {
-  width: 45%;
-}
-.card-movie i {
-  color: #F5C518;
-}
-.card-movie h2 {
-  color: #000000;
-  font-weight: bold;
-  font-size: 14px;
-}
-.card-movie button {
-  width: 100%;
-  background-color: #F5C518;
-  font-size: 14px;
-  border-color: #F5C518;
-  font-weight: 500;
-}
-.card-movie button:active, .card-movie button:focus, .card-movie button:hover {
-  background-color: #F5C518;
-  border-color: #F5C518;
-  box-shadow: 0 0 0 0.2rem rgba(245, 197, 24, 0.42);
-}
-.card-movie .description {
-  font-size: 12px;
-}
-
 .imdb {
   height: 35px;
   width: 60px;
@@ -16217,6 +16172,74 @@ h2, button {
 .navbar-toggler {
   border: unset;
   padding: 0.25rem 0.25rem;
+}
+
+.nav-imdb {
+  background-color: #F5C518;
+}
+.nav-imdb a {
+  color: #ffffff;
+}
+.nav-imdb i {
+  font-size: 25px;
+  padding: 5px;
+}
+.nav-imdb li a {
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.card-movie {
+  flex-direction: row;
+  overflow: hidden;
+}
+.card-movie .unlisted {
+  background-color: #000000;
+  position: absolute;
+  padding: 0px 5px;
+  color: white;
+  overflow: hidden;
+  border-radius: 5px;
+  top: 10%;
+  width: 20%;
+  text-align: center;
+  left: 0;
+  text-transform: uppercase;
+  font-size: 12px;
+}
+.card-movie img {
+  width: 45%;
+  border-radius: calc(0.25rem - 1px);
+}
+.card-movie i {
+  color: #F5C518;
+}
+.card-movie h2 {
+  color: #000000;
+  font-weight: bold;
+  font-size: 14px;
+}
+.card-movie button {
+  width: 100%;
+  background-color: #F5C518;
+  font-size: 14px;
+  border-color: #F5C518;
+  font-weight: 500;
+}
+.card-movie button:active, .card-movie button:focus, .card-movie button:hover {
+  background-color: #F5C518;
+  border-color: #F5C518;
+  box-shadow: 0 0 0 0.2rem rgba(245, 197, 24, 0.42);
+}
+.card-movie .card-text {
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+.card-movie .artists b {
+  text-transform: capitalize;
 }
 
 @media (max-width: 768px) {

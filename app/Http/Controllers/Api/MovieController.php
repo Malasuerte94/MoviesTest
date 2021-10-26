@@ -10,15 +10,15 @@ use Illuminate\Http\Request;
 
 class MovieController extends Controller
 {
+
     public function index()
     {
-        //get all competitions and sort by id desc
-        return MovieIndexResource::collection(Movie::all());
+        //list only movies with status 1 and rating > 5
+        return MovieIndexResource::collection(Movie::hasArtists()->status()->rating(5)->get());
     }
 
     public function show($id)
     {
-        //return one competition by id
         return new MovieShowResource(Movie::findOrFail($id));
     }
 
@@ -37,6 +37,54 @@ class MovieController extends Controller
 
 
         // return new MovieShowResource($movie);
+
+    }
+
+    public function getArtistsMovies()
+    {
+
+        //list all movies
+        return Movie::all()->load('artists');
+    }
+
+    public function getFilterMovie(Request $request)
+    {
+
+        //list all movies with a filteter
+
+
+        $request = $request->all();
+
+
+        $query = Movie::has('artists');
+        
+
+        if (array_key_exists('role', $request) && ($request['role'] !== 'null')) {
+
+            $query = Movie::whereHas('artists', function ($q) use($request) {
+                $q->where('title', '=', $request['role']);
+            });
+
+        }
+
+        if (array_key_exists('rating', $request) && ($request['rating'] !== 'null')) {
+            $query->rating($request['rating']);
+        }
+
+        if (array_key_exists('name', $request) && ($request['name'] !== 'null')) {
+            $query->where('name', 'LIKE', '%' . $request['name'] . '%');
+        }
+
+        if (array_key_exists('status', $request) && ($request['status'] !== 'null')) {
+            $query->status($request['status']);
+        }
+
+        $movies = $query->get()->load('artists');
+
+
+        return $movies->count() ? $movies : response()->json([], 404);
+
+        //return Movie::hasArtists()->get();
 
     }
 }
