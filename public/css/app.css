@@ -16122,7 +16122,7 @@ h2, button {
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-image: url("/storage/images/logo-imdb.png");
+  background-image: url("/storage/ui_images/logo-imdb.png");
 }
 
 .animated-burger-menu {
@@ -16240,6 +16240,19 @@ h2, button {
 }
 .card-movie .artists b {
   text-transform: capitalize;
+}
+
+.artists-movie {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+}
+.artists-movie .avatar {
+  margin-right: 10px;
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-color: brown;
 }
 
 @media (max-width: 768px) {

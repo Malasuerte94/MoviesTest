@@ -2,6 +2,8 @@ import VueRouter from "vue-router";
 import Movies from "./movies/Movies";
 import Movie from "./movie/Movie";
 import MoviesTop from "./movies/MoviesTop";
+import AddMovie from "./movie/addMovie";
+import DeleteMovie from "./movie/deleteMovie";
 
 const routes = [
     {
@@ -15,9 +17,19 @@ const routes = [
         name: "Top 100"
     },
     {
-        path: "/movies/:id",
+        path: "/movie/:id",
         component: Movie,
         name: "Movie"
+    },
+    {
+        path: "/add-movie",
+        component: AddMovie,
+        name: "AddMovie"
+    },
+    {
+        path: "/delete-movie",
+        component: DeleteMovie,
+        name: "DeleteMovie"
     },
 ];
 

@@ -19,25 +19,36 @@ class MovieController extends Controller
 
     public function show($id)
     {
-        return new MovieShowResource(Movie::findOrFail($id));
+        return new MovieShowResource(Movie::findOrFail($id)->load('artists'));
     }
 
     public function store(Request $request)
     {
-        //store player in db and return it
-        // $data = $request->validate([
-        //     'title'        => 'required',
-        //     'status'       => 'required'
-        // ]);
 
-        //create custom movie with player id 1
-        // $movie = Movie::make($data);
-        // $movie->player_id = 1;
-        // $movie->save();
+        $data = $request->validate([
+            'name'        => 'required|string',
+            'rating' => 'required|numeric',
+            'description'    => 'required|string',
+            'movie_image' => 'required|file|image|max:2048'
+        ]);
 
+        //$pathToFile = $request->movie_image->store('images', 'public');
+        $imageName = time().'.'.$request->movie_image->extension();
+        $request->movie_image->move(public_path('images'), $imageName);
 
-        // return new MovieShowResource($movie);
+        if($imageName) {
+            $movie = Movie::make($data);
+            $movie->image = $imageName;
+            $movie->save();
+        }
 
+        return new MovieShowResource($movie);
+
+    }
+
+    public function destroy($id)
+    {   Movie::findOrFail($id)->delete();
+        return new MovieShowResource(Movie::withTrashed()->find($id));
     }
 
     public function getArtistsMovies()
@@ -51,20 +62,14 @@ class MovieController extends Controller
     {
 
         //list all movies with a filteter
-
-
         $request = $request->all();
-
 
         $query = Movie::has('artists');
         
-
         if (array_key_exists('role', $request) && ($request['role'] !== 'null')) {
-
             $query = Movie::whereHas('artists', function ($q) use($request) {
                 $q->where('title', '=', $request['role']);
             });
-
         }
 
         if (array_key_exists('rating', $request) && ($request['rating'] !== 'null')) {

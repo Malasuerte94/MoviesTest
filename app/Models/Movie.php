@@ -11,6 +11,13 @@ class Movie extends Model
     use HasFactory;
     use SoftDeletes;
 
+    protected $fillable = [
+        'name',
+        'rating',
+        'description',
+        'image'
+    ];
+
     public function artists() {
         return $this->belongsToMany(Artist::class, 'movie_artist');
     }

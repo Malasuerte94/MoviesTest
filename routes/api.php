@@ -18,9 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-//API - compeititions index show store
-Route::apiResource('movies', MovieController::class)->only(['index', 'show', 'store']);
+Route::apiResource('movies', MovieController::class)->only(['index', 'show', 'store', 'destroy']);
 Route::get('movies-artists', [MovieController::class, 'getArtistsMovies']);
 Route::get('movies-artists/filter', [MovieController::class, 'getFilterMovie']);
 
-//API - players index show store
